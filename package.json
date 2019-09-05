@@ -19,13 +19,13 @@
   ],
   "contributors": [
     {
-      "name": "proeprtime-node contributors",
+      "name": "propertime-node contributors",
       "url": "https://github.com/pmtsit/propertime-node/graphs/contributors"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmtsit/proeprtime-node.git"
+    "url": "https://github.com/pmtsit/propertime-node.git"
   },
   "dependencies": {
     "axios": "^0.19.0",

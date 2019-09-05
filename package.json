@@ -1,0 +1,65 @@
+{
+  "name": "propertime",
+  "description": "A ProperTime helper library",
+  "version": "1.0.0",
+  "author": "Open Source Team <opensource@pmtsit.com>",
+  "keywords": [
+    "propertime",
+    "pmtsit",
+    "node",
+    "nodejs",
+    "api",
+    "rest",
+    "prometheus",
+    "time",
+    "tracking",
+    "timetracking",
+    "time tracking"
+  ],
+  "contributors": [
+    {
+      "name": "proeprtime-node contributors",
+      "url": "https://github.com/pmtsit/propertime-node/graphs/contributors"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmtsit/proeprtime-node.git"
+  },
+  "dependencies": {
+    "custom-error-generator": "^7.0.0",
+    "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
+    "object-assign": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.19.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.6.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "example": "node examples/example.js",
+    "test": "jest --config jestconfig.json",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=6.0"
+  },
+  "license": "MIT"
+}

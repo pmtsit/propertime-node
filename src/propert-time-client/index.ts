@@ -28,6 +28,9 @@ export default class ProperTimeClient {
     }
 
     const clients = await this.axios.get('/clients').then((res) => res.data as IClient[]);
+
+    console.log(`got ${clients.length} clients`);
+
     return clients;
   }
 }

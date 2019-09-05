@@ -1,7 +1,9 @@
 import axios, {AxiosInstance} from 'axios';
+import createDebug from 'debug';
 import { IClient } from '../models/client';
 
 export default class ProperTimeClient {
+  private readonly debug = createDebug('propertime-client');
   private readonly axios?: AxiosInstance;
   private readonly username: string;
   private readonly apiKey: string;
@@ -29,7 +31,7 @@ export default class ProperTimeClient {
 
     const clients = await this.axios.get('/clients').then((res) => res.data as IClient[]);
 
-    console.log(`got ${clients.length} clients`);
+    this.debug(`got ${clients.length} clients`);
 
     return clients;
   }

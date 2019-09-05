@@ -1,7 +1,7 @@
 import axios, {AxiosInstance} from 'axios';
 import { IClient } from '../models/client';
 
-export class ProperTimeClient {
+export default class ProperTimeClient {
   private readonly axios?: AxiosInstance;
   private readonly username: string;
   private readonly apiKey: string;
@@ -31,3 +31,4 @@ export class ProperTimeClient {
     return clients;
   }
 }
+

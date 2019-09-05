@@ -1,3 +1,3 @@
-import { ProperTimeClient } from './propert-time-client';
+import ProperTimeClient from './propert-time-client';
 
-export = ProperTimeClient;
+export default ProperTimeClient;

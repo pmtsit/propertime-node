@@ -27,6 +27,7 @@
     "url": "https://github.com/pmtsit/proeprtime-node.git"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "custom-error-generator": "^7.0.0",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
@@ -43,14 +44,14 @@
   },
   "scripts": {
     "build": "tsc",
-    "example": "node examples/example.js",
+    "sample": "node samples/getClients.js",
     "test": "jest --config jestconfig.json",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
     "lint": "tslint -p tsconfig.json"
   },
   "files": [

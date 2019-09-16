@@ -28,7 +28,7 @@ export interface IPatchUserParams {
     employee_number?: string;
     id_number?: string;
     rfid_card_number?: string;
-    job_title: string;
+    job_title?: string;
     time_approved_by?: string;
     organizational_unit?: string;
     date_of_birth?: Date;

@@ -79,6 +79,21 @@ describe('Entries Service Tests', () => {
         }
     }, 10000);
 
+    test('Patch entry', async () => {
+        if (!createdEntry) {
+            throw new Error('cannot run test - createdEntry is null');
+        } else if (!selectedTask) {
+            throw new Error('cannot run test - selectedTask is null');
+        } else {
+            createdEntry = await properTimeClient.entries.patch(createdEntry.id, {
+                remarks: 'entry_patched',
+            });
+
+            expect(createdEntry).toHaveProperty('task.id', selectedTask.id);
+            expect(createdEntry).toHaveProperty('remarks', 'entry_patched');
+        }
+    }, 10000);
+
     test('Get entry again', async () => {
         if (!createdEntry) {
             throw new Error('cannot run test - createdEntry is null');

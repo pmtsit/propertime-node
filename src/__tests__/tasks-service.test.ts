@@ -46,6 +46,19 @@ describe('Tasks Service Tests', () => {
         }
     }, 10000);
 
+    test('Patch task', async () => {
+        if (!createdTask) {
+            throw new Error('cannot run test - createdTask is null');
+        } else {
+            createdTask = await properTimeClient.tasks.patch(createdTask.id, {
+                external_id: 'task1externalid_patched'
+            });
+
+            expect(createdTask).toHaveProperty('name', 'task1');
+            expect(createdTask).toHaveProperty('external_id', 'task1externalid_patched');
+        }
+    }, 10000);
+
     test('Get task again', async () => {
         if (!createdTask) {
             throw new Error('cannot run test - createdTask is null');
@@ -53,7 +66,7 @@ describe('Tasks Service Tests', () => {
             const task = await properTimeClient.tasks.get(createdTask.id);
 
             expect(task).toBeDefined();
-            expect(task).toHaveProperty('external_id', 'task1externalid');
+            expect(task).toHaveProperty('external_id', 'task1externalid_patched');
         }
     }, 10000);
 

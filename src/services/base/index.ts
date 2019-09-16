@@ -65,7 +65,10 @@ export default abstract class BaseService {
                     limit,
                     offset,
                 }})
-            .then(res => res.data as T[])
+            .then(res => {
+                this.debug(`********** total from header = ${res.headers['x-total-count'] || 'does not exist'}`);
+                return res.data as T[];
+            })
             .catch(err => {
                 this.debug(err);
                 return [];

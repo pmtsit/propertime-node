@@ -42,6 +42,19 @@ describe('Users Service Tests', () => {
         expect(createdUser).toHaveProperty('external_id', 'user1externalid');
     }, 10000);
 
+    test('Patch user', async () => {
+        if (!createdUser) {
+            throw new Error('cannot run test - createdTask is null');
+        } else {
+            createdUser = await properTimeClient.users.patch(createdUser.id, {
+                external_id: 'user1externalid_patched',
+            });
+
+            expect(createdUser).toHaveProperty('display_name', 'user1');
+            expect(createdUser).toHaveProperty('external_id', 'user1externalid_patched');
+        }
+    }, 10000);
+
     test('Get user again', async () => {
         if (!createdUser) {
             throw new Error('cannot run test - createdUser is null');
@@ -49,7 +62,7 @@ describe('Users Service Tests', () => {
             const user = await properTimeClient.users.get(createdUser.id);
 
             expect(user).toBeDefined();
-            expect(user).toHaveProperty('external_id', 'user1externalid');
+            expect(user).toHaveProperty('external_id', 'user1externalid_patched');
         }
     }, 10000);
 

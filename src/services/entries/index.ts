@@ -12,9 +12,9 @@ export interface ICreateEntryParams {
 }
 
 export interface IPatchEntryParams {
-    task_id: string;
+    task_id?: string;
     client_id?: string;
-    start_time: Date;
+    start_time?: Date;
     end_time?: Date;
     remarks?: string;
 }

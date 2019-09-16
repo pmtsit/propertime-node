@@ -45,6 +45,19 @@ describe('Projects Service Tests', () => {
         }
     }, 10000);
 
+    test('Patch project', async () => {
+        if (!createdProject) {
+            throw new Error('cannot run test - createdProject is null');
+        } else {
+            createdProject = await properTimeClient.projects.patch(createdProject.id, {
+                external_id: 'project1externalid_patched'
+            });
+
+            expect(createdProject).toHaveProperty('name', 'project1');
+            expect(createdProject).toHaveProperty('external_id', 'project1externalid_patched');
+        }
+    }, 10000);
+
     test('Get project again', async () => {
         if (!createdProject) {
             throw new Error('cannot run test - createdProject is null');
@@ -52,7 +65,7 @@ describe('Projects Service Tests', () => {
             const project = await properTimeClient.projects.get(createdProject.id);
 
             expect(project).toBeDefined();
-            expect(project).toHaveProperty('external_id', 'project1externalid');
+            expect(project).toHaveProperty('external_id', 'project1externalid_patched');
         }
     }, 10000);
 

@@ -33,7 +33,11 @@ describe('Projects Service Tests', () => {
         if (!selectedClient) {
             throw new Error('cannot run test - selectedClient is null');
         } else {
-            createdProject = await properTimeClient.projects.create('project1', selectedClient.id, 'project1externalid');
+            createdProject = await properTimeClient.projects.create({
+                client_id: selectedClient.id,
+                external_id: 'project1externalid',
+                name: 'project1'
+            });
 
             expect(createdProject).toHaveProperty('name', 'project1');
             expect(createdProject).toHaveProperty('client.id', selectedClient.id);

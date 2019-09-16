@@ -2,6 +2,11 @@ import {AxiosInstance} from 'axios';
 import {IClient} from '../../models/client';
 import BaseService from '../base';
 
+export interface ICreateClientParams {
+    name: string;
+    external_id?: string;
+}
+
 export default class ClientsService extends BaseService {
     constructor(axios: AxiosInstance) {
         super(axios, '/clients');
@@ -15,10 +20,7 @@ export default class ClientsService extends BaseService {
         return await super._get<IClient>(id);
     }
 
-    public async create(name: string, externalId?: string): Promise<IClient | null> {
-        return await super._create<IClient>({
-            external_id: externalId,
-            name,
-        })
+    public async create(params: ICreateClientParams): Promise<IClient | null> {
+        return await super._create<IClient>(params);
     }
 }

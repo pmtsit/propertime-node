@@ -32,7 +32,12 @@ describe('Tasks Service Tests', () => {
         if (!selectedProject) {
             throw new Error('cannot run test - selectedProject is null');
         } else {
-            createdTask = await properTimeClient.tasks.create('task1', selectedProject.id, true, 'task1externalid');
+            createdTask = await properTimeClient.tasks.create({
+                external_id: 'task1externalid',
+                is_absence: true,
+                name: 'task1',
+                project_id: selectedProject.id
+            });
 
             expect(createdTask).toHaveProperty('name', 'task1');
             expect(createdTask).toHaveProperty('project.id', selectedProject.id);

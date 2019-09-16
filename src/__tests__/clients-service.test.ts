@@ -20,7 +20,10 @@ describe('Clients Service Tests', () => {
     }, 10000);
 
     test('Create client', async () => {
-        createdClient = await properTimeClient.clients.create('client1', 'client1externalid');
+        createdClient = await properTimeClient.clients.create({
+            external_id: 'client1externalid',
+            name: 'client1',
+        });
 
         expect(createdClient).toHaveProperty('name', 'client1');
         expect(createdClient).toHaveProperty('external_id', 'client1externalid');

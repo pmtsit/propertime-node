@@ -76,13 +76,13 @@ export default abstract class BaseService {
         return items;
     }
 
-    protected async _create<T>(req: any): Promise<T | null> {
+    protected async _create<T>(params: any): Promise<T | null> {
         if (!this.axios) {
             return null;
         }
 
         const res = await this.axios
-            .post(this.endpoint, req);
+            .post(this.endpoint, params);
 
         const item = res.data as T;
 

@@ -4,9 +4,11 @@ import ClientsService from '../services/clients';
 import ProjectsService from '../services/projects';
 import TasksService from '../services/tasks';
 import UsersService from '../services/users';
+import EntriesService from '../services/entries';
 
 export default class ProperTimeClient {
   public readonly clients: ClientsService;
+  public readonly entries: EntriesService;
   public readonly projects: ProjectsService;
   public readonly tasks: TasksService;
   public readonly users: UsersService;
@@ -29,13 +31,14 @@ export default class ProperTimeClient {
         Authorization: `Bearer ${this.apiKey}`,
         'Content-Type': 'application/json',
       },
-      timeout: 1000,
+      timeout: 10000,
     });
 
     this.clients = new ClientsService(this.axios);
     this.projects = new ProjectsService(this.axios);
     this.tasks = new TasksService(this.axios);
     this.users = new UsersService(this.axios);
+    this.entries = new EntriesService(this.axios);
   }
 
 }

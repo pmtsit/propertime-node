@@ -2,6 +2,13 @@ import {AxiosInstance} from 'axios';
 import {ITask} from '../../models/task';
 import BaseService from '../base';
 
+export interface ICreateTaskParams {
+    name: string;
+    project_id: string;
+    external_id?: string;
+    is_absence: boolean;
+}
+
 export default class TasksService extends BaseService {
     constructor(axios: AxiosInstance) {
         super(axios, '/tasks');
@@ -15,12 +22,7 @@ export default class TasksService extends BaseService {
         return await super._get<ITask>(id);
     }
 
-    public async create(name: string, projectId: string, isAbsence: boolean, externalId?: string): Promise<ITask | null> {
-        return await super._create<ITask>({
-            external_id: externalId,
-            is_absence: isAbsence,
-            name,
-            project_id: projectId,
-        })
+    public async create(params: ICreateTaskParams): Promise<ITask | null> {
+        return await super._create<ITask>(params);
     }
 }

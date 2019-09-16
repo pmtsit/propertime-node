@@ -9,6 +9,11 @@ export interface ICreateTaskParams {
     is_absence: boolean;
 }
 
+export interface IPatchTaskParams {
+    name?: string;
+    external_id?: string;
+}
+
 export default class TasksService extends BaseService {
     constructor(axios: AxiosInstance) {
         super(axios, '/tasks');
@@ -24,5 +29,9 @@ export default class TasksService extends BaseService {
 
     public async create(params: ICreateTaskParams): Promise<ITask | null> {
         return await super._create<ITask>(params);
+    }
+
+    public async patch(id: string, params: IPatchTaskParams): Promise<ITask | null> {
+        return await super._patch<ITask>(id, params);
     }
 }

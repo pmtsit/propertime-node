@@ -8,6 +8,11 @@ export interface ICreateProjectParams {
     external_id?: string;
 }
 
+export interface IPatchProjectParams {
+    name?: string;
+    external_id?: string;
+}
+
 export default class ProjectsService extends BaseService {
     constructor(axios: AxiosInstance) {
         super(axios, '/projects');
@@ -23,5 +28,9 @@ export default class ProjectsService extends BaseService {
 
     public async create(params: ICreateProjectParams): Promise<IProject | null> {
         return await super._create<IProject>(params);
+    }
+
+    public async patch(id: string, params: IPatchProjectParams): Promise<IProject | null> {
+        return await super._patch<IProject>(id, params);
     }
 }

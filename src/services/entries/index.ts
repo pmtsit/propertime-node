@@ -11,6 +11,14 @@ export interface ICreateEntryParams {
     remarks?: string;
 }
 
+export interface IPatchEntryParams {
+    task_id: string;
+    client_id?: string;
+    start_time: Date;
+    end_time?: Date;
+    remarks?: string;
+}
+
 export default class EntriesService extends BaseService {
     constructor(axios: AxiosInstance) {
         super(axios, '/entries');
@@ -26,5 +34,9 @@ export default class EntriesService extends BaseService {
 
     public async create(params: ICreateEntryParams): Promise<IEntry | null> {
         return await super._create<IEntry>(params);
+    }
+
+    public async patch(id: string, params: IPatchEntryParams): Promise<IEntry | null> {
+        return await super._patch<IEntry>(id, params);
     }
 }

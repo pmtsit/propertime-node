@@ -29,6 +29,19 @@ describe('Clients Service Tests', () => {
         expect(createdClient).toHaveProperty('external_id', 'client1externalid');
     }, 10000);
 
+    test('Patch client', async () => {
+        if (!createdClient) {
+            throw new Error('cannot run test - createdClient is null');
+        } else {
+            createdClient = await properTimeClient.clients.patch(createdClient.id, {
+                external_id: 'client1externalid_patched'
+            });
+
+            expect(createdClient).toHaveProperty('name', 'client1');
+            expect(createdClient).toHaveProperty('external_id', 'client1externalid_patched');
+        }
+    }, 10000);
+
     test('Get client again', async () => {
         if (!createdClient) {
             throw new Error('cannot run test - createdClient is null');
@@ -36,7 +49,7 @@ describe('Clients Service Tests', () => {
             const client = await properTimeClient.clients.get(createdClient.id);
 
             expect(client).toBeDefined();
-            expect(client).toHaveProperty('external_id', 'client1externalid');
+            expect(client).toHaveProperty('external_id', 'client1externalid_patched');
         }
     }, 10000);
 

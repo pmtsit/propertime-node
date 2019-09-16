@@ -7,6 +7,11 @@ export interface ICreateClientParams {
     external_id?: string;
 }
 
+export interface IPatchClientParams {
+    name?: string;
+    external_id?: string;
+}
+
 export default class ClientsService extends BaseService {
     constructor(axios: AxiosInstance) {
         super(axios, '/clients');
@@ -22,5 +27,9 @@ export default class ClientsService extends BaseService {
 
     public async create(params: ICreateClientParams): Promise<IClient | null> {
         return await super._create<IClient>(params);
+    }
+
+    public async patch(id: string, params: IPatchClientParams): Promise<IClient | null> {
+        return await super._patch<IClient>(id, params);
     }
 }

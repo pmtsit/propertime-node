@@ -17,7 +17,24 @@ export interface ICreateUserParams {
     date_of_birth?: Date;
     hire_date?: Date;
     termination_date?: Date;
-};
+}
+
+export interface IPatchUserParams {
+    first_name?: string;
+    last_name?: string;
+    display_name?: string;
+    email?: string;
+    external_id?: string;
+    employee_number?: string;
+    id_number?: string;
+    rfid_card_number?: string;
+    job_title: string;
+    time_approved_by?: string;
+    organizational_unit?: string;
+    date_of_birth?: Date;
+    hire_date?: Date;
+    termination_date?: Date;
+}
 
 export default class UsersService extends BaseService {
 
@@ -35,5 +52,9 @@ export default class UsersService extends BaseService {
 
     public async create(params: ICreateUserParams): Promise<IUser | null> {
         return await super._create<IUser>(params);
+    }
+
+    public async patch(id: string, params: IPatchUserParams): Promise<IUser | null> {
+        return await super._patch<IUser>(id, params);
     }
 }

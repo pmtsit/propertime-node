@@ -94,4 +94,23 @@ export default abstract class BaseService {
 
         return item;
     }
+
+    protected async _patch<T>(id: string, params: any): Promise<T | null> {
+        if (!this.axios) {
+            return null;
+        }
+
+        const res = await this.axios
+            .patch(`${this.endpoint}/${id}`, params);
+
+        const item = res.data as T;
+
+        if (item) {
+            this.debug(`updated the item ${JSON.stringify(item)}`);
+        } else {
+            this.debug('item not changed');
+        }
+
+        return item;
+    }
 }

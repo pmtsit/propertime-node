@@ -52,7 +52,7 @@
   "scripts": {
     "build": "tsc",
     "sample": "node samples/getClients.js",
-    "test": "DEBUG=propertime-client jest --config jestconfig.json",
+    "test": "DEBUG=propertime-client jest --config jestconfig.json --detectOpenHandles",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",

@@ -11,6 +11,10 @@ export default class ClientsService extends BaseService {
         return await super._list<IClient>(offset, limit);
     }
 
+    public async get(id: string): Promise<IClient | null> {
+        return await super._get<IClient>(id);
+    }
+
     public async create(name: string, externalId?: string): Promise<IClient | null> {
         return await super._create<IClient>({
             external_id: externalId,

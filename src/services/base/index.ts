@@ -37,6 +37,24 @@ export default abstract class BaseService {
         return result;
     }
 
+    protected async _get<T>(id: string): Promise<T | null> {
+        if (!this.axios) {
+            return null;
+        }
+
+        const item = await this.axios
+            .get(`${this.endpoint}/${id}`)
+            .then(res => res.data as T)
+            .catch(err => {
+                this.debug(err);
+                return null;
+            });
+
+        this.debug(item ? `got item ${JSON.stringify(item)}` : `failed getting item with id ${id}`);
+
+        return item;
+    }
+
     protected async _list<T>(offset?: number, limit?: number): Promise<T[]> {
         if (!this.axios) {
             return [];

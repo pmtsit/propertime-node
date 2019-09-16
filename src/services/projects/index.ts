@@ -11,6 +11,10 @@ export default class ProjectsService extends BaseService {
         return await super._list<IProject>(offset, limit);
     }
 
+    public async get(id: string): Promise<IProject | null> {
+        return await super._get<IProject>(id);
+    }
+
     public async create(name: string, clientId: string, externalId?: string): Promise<IProject | null> {
         return await super._create<IProject>({
             client_id: clientId,

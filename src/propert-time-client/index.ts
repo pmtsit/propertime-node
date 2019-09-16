@@ -3,10 +3,12 @@ import createDebug from 'debug';
 import { IClient } from '../models/client';
 import ClientsService from '../services/clients';
 import ProjectsService from '../services/projects';
+import TasksService from '../services/tasks';
 
 export default class ProperTimeClient {
   public readonly clients: ClientsService;
   public readonly projects: ProjectsService;
+  public readonly tasks: TasksService;
 
   private readonly debug = createDebug('propertime-client');
   private readonly axios?: AxiosInstance;
@@ -31,6 +33,7 @@ export default class ProperTimeClient {
 
     this.clients = new ClientsService(this.axios);
     this.projects = new ProjectsService(this.axios);
+    this.tasks = new TasksService(this.axios);
   }
 
 }

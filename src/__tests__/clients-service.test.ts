@@ -1,8 +1,6 @@
 import ProperTimeClient from '../index';
 import {IClient} from '../models/client';
 
-jest.setTimeout(10000);
-
 let originalNumberOfClients = 0;
 let clients: IClient[] = [];
 let createdClient: IClient | null = null;
@@ -25,14 +23,13 @@ test('Create client', async () => {
 test('Get clients again', async () => {
     clients = await properTimeClient.clients.list();
 
-  expect(clients).toHaveLength(originalNumberOfClients + 1);
+    expect(clients).toHaveLength(originalNumberOfClients + 1);
 }, 10000);
 
 test('Delete client', async () => {
     if (!createdClient) {
         throw new Error('cannot run test - createdClient is null');
-    }
-    else {
+    } else {
         const deleteResult = await properTimeClient.clients.delete(createdClient.id);
 
         expect(deleteResult).toHaveProperty('id', createdClient.id);

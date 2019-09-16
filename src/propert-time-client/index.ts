@@ -2,9 +2,11 @@ import axios, { AxiosInstance } from 'axios';
 import createDebug from 'debug';
 import { IClient } from '../models/client';
 import ClientsService from '../services/clients';
+import ProjectsService from '../services/projects';
 
 export default class ProperTimeClient {
   public readonly clients: ClientsService;
+  public readonly projects: ProjectsService;
 
   private readonly debug = createDebug('propertime-client');
   private readonly axios?: AxiosInstance;
@@ -28,28 +30,7 @@ export default class ProperTimeClient {
     });
 
     this.clients = new ClientsService(this.axios);
+    this.projects = new ProjectsService(this.axios);
   }
-  //
-  // public async createClient(name: string, externalId?: string): Promise<IClient | null> {
-  //   if (!this.axios) {
-  //     return null;
-  //   }
-  //
-  //   const res = await this.axios
-  //       .post('/clients', {
-  //         external_id: externalId,
-  //         name,
-  //       });
-  //
-  //   const client = res.data as IClient;
-  //
-  //   if (client) {
-  //     this.debug(`created the client ${client.name} with id ${client.id}`);
-  //   } else {
-  //     this.debug('client not created');
-  //   }
-  //
-  //
-  //   return client;
-  // }
+
 }

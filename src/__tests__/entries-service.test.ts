@@ -18,8 +18,6 @@ describe('Entries Service Tests', () => {
 
     test('Get some entries', async () => {
 
-        let page: IEntry[] = [];
-
         const limit = 5;
         const maxPages = 5;
         let pages = 0;
@@ -28,7 +26,7 @@ describe('Entries Service Tests', () => {
         let total = 0;
 
         while (shouldContinue) {
-            page = await properTimeClient.entries.list(offset, limit);
+            const page = await properTimeClient.entries.list(offset, limit);
 
             pages++;
 

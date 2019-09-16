@@ -3,8 +3,7 @@ import {IEntry} from '../models/entry';
 import {ITask} from '../models/task';
 import {IUser} from '../models/user';
 
-let originalNumberOfEntries = 0;
-let entries: IEntry[] = [];
+const entries: IEntry[] = [];
 let selectedTask: ITask | null = null;
 let selectedUser: IUser | null = null;
 let createdEntry: IEntry | null = null;
@@ -19,8 +18,30 @@ describe('Entries Service Tests', () => {
 
     test('Get some entries', async () => {
 
-        entries = await properTimeClient.entries.list();
-        originalNumberOfEntries = entries.length;
+        let page: IEntry[] = [];
+
+        const limit = 5;
+        const maxPages = 5;
+        let pages = 0;
+        let offset = 0;
+        let shouldContinue = true;
+        let total = 0;
+
+        while (shouldContinue) {
+            page = await properTimeClient.entries.list(offset, limit);
+
+            pages++;
+
+            offset += page.length;
+            total += page.length;
+
+            entries.push(...page);
+
+            shouldContinue = (page.length === limit && pages < maxPages);
+        }
+
+        expect(entries.length).toEqual(total);
+
     }, 10000);
 
     test('Select user', async () => {

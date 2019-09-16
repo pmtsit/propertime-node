@@ -6,10 +6,10 @@ export default abstract class BaseService {
     protected readonly axios?: AxiosInstance;
     protected endpoint: string = '';
 
-    private readonly debug: Debugger;
+    protected readonly debug: Debugger;
 
     protected constructor(axios: AxiosInstance, endpoint: string) {
-        this.debug = createDebug('propertime-client');
+        this.debug = createDebug(`propertime-service ${endpoint}`);
         this.axios = axios;
         this.endpoint = endpoint;
     }

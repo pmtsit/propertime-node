@@ -1,14 +1,15 @@
 import axios, { AxiosInstance } from 'axios';
 import createDebug from 'debug';
-import { IClient } from '../models/client';
 import ClientsService from '../services/clients';
 import ProjectsService from '../services/projects';
 import TasksService from '../services/tasks';
+import UsersService from '../services/users';
 
 export default class ProperTimeClient {
   public readonly clients: ClientsService;
   public readonly projects: ProjectsService;
   public readonly tasks: TasksService;
+  public readonly users: UsersService;
 
   private readonly debug = createDebug('propertime-client');
   private readonly axios?: AxiosInstance;
@@ -34,6 +35,7 @@ export default class ProperTimeClient {
     this.clients = new ClientsService(this.axios);
     this.projects = new ProjectsService(this.axios);
     this.tasks = new TasksService(this.axios);
+    this.users = new UsersService(this.axios);
   }
 
 }

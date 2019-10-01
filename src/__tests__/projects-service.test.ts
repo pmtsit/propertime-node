@@ -1,11 +1,11 @@
 import ProperTimeClient from '../index';
-import {IClient} from '../models/client';
-import {IProject} from '../models/project';
+import {Client} from '../models/client';
+import {Project} from '../models/project';
 
 let originalNumberOfProjects = 0;
-let projects: IProject[] = [];
-let selectedClient: IClient | null = null;
-let createdProject: IProject | null = null;
+let projects: Project[] = [];
+let selectedClient: Client | null = null;
+let createdProject: Project | null = null;
 
 let properTimeClient: ProperTimeClient;
 
@@ -34,14 +34,14 @@ describe('Projects Service Tests', () => {
             throw new Error('cannot run test - selectedClient is null');
         } else {
             createdProject = await properTimeClient.projects.create({
-                client_id: selectedClient.id,
-                external_id: 'project1externalid',
+                clientId: selectedClient.id,
+                externalId: 'project1externalid',
                 name: 'project1'
             });
 
             expect(createdProject).toHaveProperty('name', 'project1');
             expect(createdProject).toHaveProperty('client.id', selectedClient.id);
-            expect(createdProject).toHaveProperty('external_id', 'project1externalid');
+            expect(createdProject).toHaveProperty('externalId', 'project1externalid');
         }
     }, 10000);
 
@@ -50,11 +50,11 @@ describe('Projects Service Tests', () => {
             throw new Error('cannot run test - createdProject is null');
         } else {
             createdProject = await properTimeClient.projects.patch(createdProject.id, {
-                external_id: 'project1externalid_patched'
+                externalId: 'project1externalid_patched'
             });
 
             expect(createdProject).toHaveProperty('name', 'project1');
-            expect(createdProject).toHaveProperty('external_id', 'project1externalid_patched');
+            expect(createdProject).toHaveProperty('externalId', 'project1externalid_patched');
         }
     }, 10000);
 
@@ -65,7 +65,7 @@ describe('Projects Service Tests', () => {
             const project = await properTimeClient.projects.get(createdProject.id);
 
             expect(project).toBeDefined();
-            expect(project).toHaveProperty('external_id', 'project1externalid_patched');
+            expect(project).toHaveProperty('externalId', 'project1externalid_patched');
         }
     }, 10000);
 

@@ -112,14 +112,14 @@ export class PatchUserParams implements IPatchUserParams {
     }
 }
 
-export default class UsersService extends BaseService {
+export default class UsersService extends BaseService<User> {
 
     constructor(axios: AxiosInstance) {
         super(axios, '/users');
     }
 
     public async list(offset?: number, limit?: number): Promise<User[]> {
-        const result = await super._list<User>(offset, limit);
+        const result = await super._list(offset, limit);
 
         const users = result ? plainToClass(User, result) : [];
 
@@ -127,7 +127,7 @@ export default class UsersService extends BaseService {
     }
 
     public async get(id: string): Promise<User | null> {
-        const result = await super._get<User>(id);
+        const result = await super._get(id);
 
         const user = result ? plainToClass(User, result) : null;
 
@@ -135,7 +135,7 @@ export default class UsersService extends BaseService {
     }
 
     public async create(createUserParams: ICreateUserParams): Promise<User | null> {
-        const result = await super._create<User>(classToPlain(new CreateUserParams(createUserParams)));
+        const result = await super._create(classToPlain(new CreateUserParams(createUserParams)));
 
         const user = result ? plainToClass(User, result) : null;
 
@@ -143,7 +143,7 @@ export default class UsersService extends BaseService {
     }
 
     public async patch(id: string, params: IPatchUserParams): Promise<User | null> {
-        const result = await super._patch<User>(id, classToPlain(new PatchUserParams(params)));
+        const result = await super._patch(id, classToPlain(new PatchUserParams(params)));
 
         const user = result ? plainToClass(User, result) : null;
 

@@ -1,9 +1,10 @@
 import {AxiosInstance} from 'axios';
 import createDebug, {Debugger} from 'debug';
 import {IDeleteResult} from '../../models/delete-result';
-import {classToPlain, plainToClass, plainToClassFromExist} from 'class-transformer';
+import {plainToClass} from 'class-transformer';
+import {User} from '../../models/user';
 
-export default abstract class BaseService {
+export default abstract class BaseService<T> {
     protected readonly axios?: AxiosInstance;
     protected endpoint: string = '';
 
@@ -37,12 +38,12 @@ export default abstract class BaseService {
 
         return result;
     }
-    //
-    // protected factory<T>(type: new () => T): T {
-    //     return new type();
-    // }
 
-    protected async _get<T>(id: string): Promise<T | null> {
+    protected toClass(type: new () => T, plain: T): T {
+        return new type();
+    }
+
+    protected async _get(id: string): Promise<T | null> {
         if (!this.axios) {
             return null;
         }
@@ -60,7 +61,7 @@ export default abstract class BaseService {
         return item;
     }
 
-    protected async _list<T>(offset?: number, limit?: number): Promise<T[]> {
+    protected async _list(offset?: number, limit?: number): Promise<T[]> {
         if (!this.axios) {
             return [];
         }
@@ -84,7 +85,7 @@ export default abstract class BaseService {
         return items;
     }
 
-    protected async _create<T>(params: any): Promise<T | null> {
+    protected async _create(params: any): Promise<T | null> {
         if (!this.axios) {
             return null;
         }
@@ -103,7 +104,7 @@ export default abstract class BaseService {
         return item;
     }
 
-    protected async _patch<T>(id: string, params: any): Promise<T | null> {
+    protected async _patch(id: string, params: any): Promise<T | null> {
         if (!this.axios) {
             return null;
         }

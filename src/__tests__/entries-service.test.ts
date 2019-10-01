@@ -1,12 +1,12 @@
 import ProperTimeClient from '../index';
-import {IEntry} from '../models/entry';
-import {ITask} from '../models/task';
+import {Entry} from '../models/entry';
+import {Task} from '../models/task';
 import {User} from '../models/user';
 
-const entries: IEntry[] = [];
-let selectedTask: ITask | null = null;
+const entries: Entry[] = [];
+let selectedTask: Task | null = null;
 let selectedUser: User | null = null;
-let createdEntry: IEntry | null = null;
+let createdEntry: Entry | null = null;
 
 let properTimeClient: ProperTimeClient;
 
@@ -66,11 +66,11 @@ describe('Entries Service Tests', () => {
         } else {
             createdEntry = await properTimeClient.entries.create({
                 // client_id: "",
-                end_time: new Date(2019,9,1, 11),
+                endTime: new Date(2019,9,1, 11),
                 remarks: 'test entry',
-                start_time: new Date(2019,9,1, 10),
-                task_id: selectedTask.id,
-                user_id: selectedUser.id,
+                startTime: new Date(2019,9,1, 10),
+                taskId: selectedTask.id,
+                userId: selectedUser.id,
             });
 
             expect(createdEntry).toHaveProperty('duration', 60);

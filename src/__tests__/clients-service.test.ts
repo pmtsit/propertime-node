@@ -1,9 +1,9 @@
 import ProperTimeClient from '../index';
-import {IClient} from '../models/client';
+import {Client} from '../models/client';
 
 let originalNumberOfClients = 0;
-let clients: IClient[] = [];
-let createdClient: IClient | null = null;
+let clients: Client[] = [];
+let createdClient: Client | null = null;
 
 let properTimeClient: ProperTimeClient;
 
@@ -21,12 +21,12 @@ describe('Clients Service Tests', () => {
 
     test('Create client', async () => {
         createdClient = await properTimeClient.clients.create({
-            external_id: 'client1externalid',
+            externalId: 'client1externalid',
             name: 'client1',
         });
 
         expect(createdClient).toHaveProperty('name', 'client1');
-        expect(createdClient).toHaveProperty('external_id', 'client1externalid');
+        expect(createdClient).toHaveProperty('externalId', 'client1externalid');
     }, 10000);
 
     test('Patch client', async () => {
@@ -34,11 +34,11 @@ describe('Clients Service Tests', () => {
             throw new Error('cannot run test - createdClient is null');
         } else {
             createdClient = await properTimeClient.clients.patch(createdClient.id, {
-                external_id: 'client1externalid_patched'
+                externalId: 'client1externalid_patched'
             });
 
             expect(createdClient).toHaveProperty('name', 'client1');
-            expect(createdClient).toHaveProperty('external_id', 'client1externalid_patched');
+            expect(createdClient).toHaveProperty('externalId', 'client1externalid_patched');
         }
     }, 10000);
 
@@ -49,7 +49,7 @@ describe('Clients Service Tests', () => {
             const client = await properTimeClient.clients.get(createdClient.id);
 
             expect(client).toBeDefined();
-            expect(client).toHaveProperty('external_id', 'client1externalid_patched');
+            expect(client).toHaveProperty('externalId', 'client1externalid_patched');
         }
     }, 10000);
 

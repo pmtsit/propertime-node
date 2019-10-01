@@ -1,5 +1,4 @@
-import {Expose, Type} from "class-transformer";
-
+import {classToPlain, Expose, plainToClass, Type} from "class-transformer";
 export class User {
   public id: string;
   @Expose({ name: "first_name" })
@@ -28,4 +27,5 @@ export class User {
   @Type(() => Date)
   @Expose({ name: "date_of_birth" })
   public dateOfBirth?: Date;
+
 }

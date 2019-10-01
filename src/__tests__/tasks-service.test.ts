@@ -1,11 +1,11 @@
 import ProperTimeClient from '../index';
-import {IProject} from '../models/project';
-import {ITask} from '../models/task';
+import {Project} from '../models/project';
+import {Task} from '../models/task';
 
 let originalNumberOfTasks = 0;
-let tasks: ITask[] = [];
-let selectedProject: IProject | null = null;
-let createdTask: ITask | null = null;
+let tasks: Task[] = [];
+let selectedProject: Project | null = null;
+let createdTask: Task | null = null;
 
 let properTimeClient: ProperTimeClient;
 
@@ -33,16 +33,16 @@ describe('Tasks Service Tests', () => {
             throw new Error('cannot run test - selectedProject is null');
         } else {
             createdTask = await properTimeClient.tasks.create({
-                external_id: 'task1externalid',
-                is_absence: true,
+                externalId: 'task1externalid',
+                isAbsence: true,
                 name: 'task1',
-                project_id: selectedProject.id
+                projectId: selectedProject.id
             });
 
             expect(createdTask).toHaveProperty('name', 'task1');
             expect(createdTask).toHaveProperty('project.id', selectedProject.id);
-            expect(createdTask).toHaveProperty('is_absence', true);
-            expect(createdTask).toHaveProperty('external_id', 'task1externalid');
+            expect(createdTask).toHaveProperty('isAbsence', true);
+            expect(createdTask).toHaveProperty('externalId', 'task1externalid');
         }
     }, 10000);
 
@@ -51,11 +51,11 @@ describe('Tasks Service Tests', () => {
             throw new Error('cannot run test - createdTask is null');
         } else {
             createdTask = await properTimeClient.tasks.patch(createdTask.id, {
-                external_id: 'task1externalid_patched'
+                externalId: 'task1externalid_patched'
             });
 
             expect(createdTask).toHaveProperty('name', 'task1');
-            expect(createdTask).toHaveProperty('external_id', 'task1externalid_patched');
+            expect(createdTask).toHaveProperty('externalId', 'task1externalid_patched');
         }
     }, 10000);
 
@@ -66,7 +66,7 @@ describe('Tasks Service Tests', () => {
             const task = await properTimeClient.tasks.get(createdTask.id);
 
             expect(task).toBeDefined();
-            expect(task).toHaveProperty('external_id', 'task1externalid_patched');
+            expect(task).toHaveProperty('externalId', 'task1externalid_patched');
         }
     }, 10000);
 

@@ -1,6 +1,7 @@
 import {AxiosInstance} from 'axios';
 import createDebug, {Debugger} from 'debug';
 import {IDeleteResult} from '../../models/delete-result';
+import {classToPlain, plainToClass, plainToClassFromExist} from 'class-transformer';
 
 export default abstract class BaseService {
     protected readonly axios?: AxiosInstance;
@@ -36,6 +37,10 @@ export default abstract class BaseService {
 
         return result;
     }
+    //
+    // protected factory<T>(type: new () => T): T {
+    //     return new type();
+    // }
 
     protected async _get<T>(id: string): Promise<T | null> {
         if (!this.axios) {
@@ -85,7 +90,7 @@ export default abstract class BaseService {
         }
 
         const res = await this.axios
-            .post(this.endpoint, params);
+            .post<T>(this.endpoint, params);
 
         const item = res.data as T;
 

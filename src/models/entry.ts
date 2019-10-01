@@ -1,10 +1,10 @@
 import {IClient} from './client';
 import {ITask} from './task';
-import {IUser} from './user';
+import {User} from './user';
 
 export interface IEntry {
   id: string;
-  user?: IUser;
+  user?: User;
   task?: ITask;
   client?: IClient;
   is_deleted: boolean;

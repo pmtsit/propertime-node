@@ -1,10 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
 import createDebug from 'debug';
+import "reflect-metadata";
 import ClientsService from '../services/clients';
+import EntriesService from '../services/entries';
 import ProjectsService from '../services/projects';
 import TasksService from '../services/tasks';
 import UsersService from '../services/users';
-import EntriesService from '../services/entries';
 
 export default class ProperTimeClient {
   public readonly clients: ClientsService;
@@ -25,7 +26,7 @@ export default class ProperTimeClient {
 
     this.axios = axios.create({
       // baseURL: 'https://test-api.propertime.io/v1',
-      baseURL: 'http://localhost:3000/v1',
+      baseURL: 'http://localhost:3001/v1',
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${this.apiKey}`,

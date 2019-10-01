@@ -1,11 +1,11 @@
 import ProperTimeClient from '../index';
 import {IEntry} from '../models/entry';
 import {ITask} from '../models/task';
-import {IUser} from '../models/user';
+import {User} from '../models/user';
 
 const entries: IEntry[] = [];
 let selectedTask: ITask | null = null;
-let selectedUser: IUser | null = null;
+let selectedUser: User | null = null;
 let createdEntry: IEntry | null = null;
 
 let properTimeClient: ProperTimeClient;

@@ -2,10 +2,15 @@ import ProperTimeClient from '../index';
 import {User} from '../models/user';
 
 import * as moment from 'moment-timezone';
+
 moment.tz.setDefault("Universal");
 
 let originalNumberOfUsers = 0;
+let originalNumberOfActiveUsers = 0;
+let originalNumberOfInactiveUsers = 0;
 let users: User[] = [];
+let activeUsers: User[] = [];
+let inactiveUsers: User[] = [];
 let createdUser: User | null = null;
 
 let properTimeClient: ProperTimeClient;
@@ -20,6 +25,18 @@ describe('Users Service Tests', () => {
 
         users = await properTimeClient.users.list();
         originalNumberOfUsers = users.length;
+    }, 10000);
+
+    test('Get active users', async () => {
+
+        activeUsers = await properTimeClient.users.list(0, 1000, {isActive: true});
+        originalNumberOfActiveUsers = activeUsers.length;
+    }, 10000);
+
+    test('Get inactive users', async () => {
+
+        inactiveUsers = await properTimeClient.users.list(undefined, 100, {isActive: false});
+        originalNumberOfInactiveUsers = inactiveUsers.length;
     }, 10000);
 
     test('Create user', async () => {

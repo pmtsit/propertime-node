@@ -112,14 +112,27 @@ export class PatchUserParams implements IPatchUserParams {
     }
 }
 
+export interface IGetUsersFilterOptions {
+    isActive?: boolean;
+}
+
+export class GetUsersFilterOptions implements IGetUsersFilterOptions {
+    @Expose({ name: "is_active" })
+    public isActive?: boolean;
+
+    constructor(getUsersFilterOptions: IGetUsersFilterOptions) {
+        Object.assign(this, getUsersFilterOptions);
+    }
+}
+
 export default class UsersService extends BaseService<User> {
 
     constructor(axios: AxiosInstance) {
         super(axios, '/users');
     }
 
-    public async list(offset?: number, limit?: number): Promise<User[]> {
-        const result = await super._list(offset, limit);
+    public async list(offset?: number, limit?: number, filterOptions?: IGetUsersFilterOptions): Promise<User[]> {
+        const result = await super._list(offset, limit, filterOptions !== undefined ? classToPlain(new GetUsersFilterOptions(filterOptions)) : undefined);
 
         const users = result ? plainToClass(User, result) : [];
 

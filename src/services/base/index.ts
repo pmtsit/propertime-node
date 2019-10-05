@@ -61,16 +61,27 @@ export default abstract class BaseService<T> {
         return item;
     }
 
-    protected async _list(offset?: number, limit?: number): Promise<T[]> {
+    protected async _list(offset?: number, limit?: number, filter?: any): Promise<T[]> {
         if (!this.axios) {
             return [];
         }
 
+        let params: any = {
+            limit,
+            offset,
+        };
+
+        if (filter) {
+            params = {
+                ...filter,
+                ...params,
+            };
+        }
+
+        this.debug(`********** params = ${params ? JSON.stringify(params) : 'none'}`);
+
         const items = await this.axios
-            .get(this.endpoint, { params: {
-                    limit,
-                    offset,
-                }})
+            .get(this.endpoint, { params })
             .then(res => {
                 this.debug(`********** total from header = ${res.headers['x-total-count'] || 'does not exist'}`);
                 return res.data as T[];

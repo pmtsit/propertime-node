@@ -11,6 +11,7 @@ let originalNumberOfInactiveUsers = 0;
 let users: User[] = [];
 let activeUsers: User[] = [];
 let inactiveUsers: User[] = [];
+let terminatedUsers: User[] = [];
 let createdUser: User | null = null;
 
 let properTimeClient: ProperTimeClient;
@@ -87,6 +88,14 @@ describe('Users Service Tests', () => {
             expect(user).toBeDefined();
             expect(user).toHaveProperty('externalId', 'user1externalid_patched');
         }
+    }, 10000);
+
+    test('Get users with termination', async () => {
+
+        terminatedUsers = await properTimeClient.users.list(undefined, 100, {terminationAfter: moment('1990-01-01').toDate()});
+
+        expect(terminatedUsers ? terminatedUsers.length : 0).toBeGreaterThan(0);
+
     }, 10000);
 
     test('Delete user', async () => {

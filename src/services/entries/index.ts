@@ -1,7 +1,7 @@
 import {AxiosInstance} from 'axios';
+import {classToPlain, Expose, plainToClass, Type} from 'class-transformer';
 import {Entry} from '../../models/entry';
 import BaseService from '../base';
-import {classToPlain, Expose, plainToClass, Type} from 'class-transformer';
 
 export interface ICreateEntryParams {
     userId: string;
@@ -58,13 +58,30 @@ export class PatchEntryParams implements  IPatchEntryParams {
     }
 }
 
+export interface IGetEntriesFilterOptions {
+    userId?: string;
+    startAfter?: Date;
+}
+
+export class GetEntriesFilterOptions implements IGetEntriesFilterOptions {
+    @Expose({ name: "user_id" })
+    public userId?: string;
+
+    @Expose({ name: "start_after" })
+    public startAfter?: Date;
+
+    constructor(getEntriesFilterOptions: IGetEntriesFilterOptions) {
+        Object.assign(this, getEntriesFilterOptions);
+    }
+}
+
 export default class EntriesService extends BaseService<Entry> {
     constructor(axios: AxiosInstance) {
         super(axios, '/entries');
     }
 
-    public async list(offset?: number, limit?: number): Promise<Entry[]> {
-        const result = await super._list(offset, limit);
+    public async list(offset?: number, limit?: number, filterOptions?: IGetEntriesFilterOptions): Promise<Entry[]> {
+        const result = await super._list(offset, limit, filterOptions !== undefined ? classToPlain(new GetEntriesFilterOptions(filterOptions)) : undefined);
 
         const entries = result ? plainToClass(Entry, result) : [];
 

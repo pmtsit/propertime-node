@@ -4,6 +4,8 @@ import {Task} from '../models/task';
 import {User} from '../models/user';
 
 const entries: Entry[] = [];
+let userEntries: Entry[] = [];
+
 let selectedTask: Task | null = null;
 let selectedUser: User | null = null;
 let createdEntry: Entry | null = null;
@@ -111,6 +113,20 @@ describe('Entries Service Tests', () => {
         }
     }, 10000);
 
+
+    test('Get user entries', async () => {
+        if (!selectedUser) {
+            throw new Error('cannot run test - createdEntry is null');
+        } else {
+            userEntries = await properTimeClient.entries.list(undefined, undefined, {
+                startAfter: new Date(2019, 9, 1, 5),
+                userId: selectedUser.id,
+            });
+
+            expect(userEntries.length).toBeGreaterThan(0);
+        }
+    }, 10000);
+
     test('Delete entry', async () => {
         if (!createdEntry) {
             throw new Error('cannot run test - createdEntry is null');
@@ -120,6 +136,20 @@ describe('Entries Service Tests', () => {
             expect(deleteResult).toHaveProperty('id', createdEntry.id);
             expect(deleteResult).toHaveProperty('result', true);
         }
+    }, 10000);
+
+    test('Get user entries after deleting entry', async () => {
+        if (!selectedUser) {
+            throw new Error('cannot run test - createdEntry is null');
+        } else {
+            const userEntries2 = await properTimeClient.entries.list(undefined, undefined, {
+                startAfter: new Date(2019, 9, 1, 5),
+                userId: selectedUser.id,
+            });
+
+            expect(userEntries2.length).toBe(userEntries.length - 1);
+        }
+
     }, 10000);
 
 });

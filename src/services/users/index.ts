@@ -10,7 +10,7 @@ export interface ICreateUserParams {
     displayName?: string;
     email?: string;
     externalId?: string;
-    employeeNumber: string;
+    employeeNumber?: string;
     idNumber?: string;
     rfidCardNumber?: string;
     jobTitle: string;
@@ -32,7 +32,7 @@ export class CreateUserParams implements ICreateUserParams{
     @Expose({ name: "external_id" })
     public externalId?: string;
     @Expose({ name: "employee_number" })
-    public employeeNumber: string;
+    public employeeNumber?: string;
     @Expose({ name: "id_number" })
     public idNumber?: string;
     @Expose({ name: "rfid_card_number" })

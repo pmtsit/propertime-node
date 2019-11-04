@@ -27,8 +27,8 @@ export default class ProperTimeClient {
     this.apiKey = apiKey;
 
     this.axios = axios.create({
-      // baseURL: 'https://test-api.propertime.io/v1',
-      baseURL: 'http://localhost:3001/v1',
+      baseURL: 'https://test-api.propertime.io/v1',
+      // baseURL: 'http://localhost:3001/v1',
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${this.apiKey}`,

@@ -45,7 +45,7 @@ describe('Users Service Tests', () => {
             dateOfBirth: moment("1990-03-01").toDate(),
             displayName: 'user1',
             email: 'user1@propertime.io',
-            employeeNumber: '123456',
+            // employeeNumber: '123456', // check not mandatory
             externalId: 'user1externalid',
             firstName: 'first1',
             hireDate: moment("2010-04-22").toDate(),

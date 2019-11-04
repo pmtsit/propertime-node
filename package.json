@@ -29,15 +29,23 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "class-transformer": "^0.2.3",
     "custom-error-generator": "^7.0.0",
     "debug": "^4.1.1",
     "moment": "^2.24.0",
+    "moment-timezone": "latest",
     "node-fetch": "^2.6.0",
-    "object-assign": "^4.1.1"
+    "object-assign": "^4.1.1",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
+    "@types/moment-timezone": "^0.5.12",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-typescript": "^7.6.0",
     "@types/debug": "^4.1.5",
     "@types/jest": "^24.0.18",
+    "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
@@ -48,7 +56,7 @@
   "scripts": {
     "build": "tsc",
     "sample": "node samples/getClients.js",
-    "test": "DEBUG=propertime-client jest --config jestconfig.json",
+    "test": "DEBUG=propertime-* jest --config jestconfig.json --detectOpenHandles",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",

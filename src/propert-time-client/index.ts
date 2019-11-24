@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import createDebug from 'debug';
-import "reflect-metadata";
+import 'reflect-metadata';
 import ClientsService from '../services/clients';
 import EntriesService from '../services/entries';
 import OrganizationUnitsService from '../services/organization-units';
@@ -44,5 +44,4 @@ export default class ProperTimeClient {
     this.users = new UsersService(this.axios);
     this.entries = new EntriesService(this.axios);
   }
-
 }

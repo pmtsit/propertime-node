@@ -1,7 +1,7 @@
 {
   "name": "propertime",
   "description": "A ProperTime helper library",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Open Source Team <opensource@pmtsit.com>",
   "homepage": "https://pmtsit.com",
   "keywords": [
@@ -39,12 +39,12 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@types/moment-timezone": "^0.5.12",
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-typescript": "^7.6.0",
     "@types/debug": "^4.1.5",
     "@types/jest": "^24.0.18",
+    "@types/moment-timezone": "^0.5.12",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",

@@ -28,7 +28,7 @@
     "url": "https://github.com/pmtsit/propertime-node.git"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "class-transformer": "^0.3.1",
     "custom-error-generator": "^7.0.0",
     "debug": "^4.1.1",
